@@ -1,0 +1,26 @@
+
+<div class="jumbotron">
+<h1 align="center">Goals</h1>
+<p align="center">After filling out your questionnaire you should hopefully have some ideas about areas of your game that you may want to improve on. This is the place to let your coaches know what is important to you to improve on.</p>
+<p align="center"><b>1 being never, 5 often</b></p>
+<form action='/dashboard/ipdp_page_12/<%- id -%>' method="post">
+
+    <div class="form-group">
+      <label for="short_term_goals">Short Term Goals (during this current season)</label>
+      <textarea class="form-control" id="short_term_goals" rows="3" name="short_term_goals"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="long_term_goals">Long Term Goals (beyond this current season)</label>
+      <textarea class="form-control" id="long_term_goals" rows="3" name="long_term_goals"></textarea>
+    </div>
+<p></p>
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+<p><strong>Progress</strong></p>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 84%"></div>
+</div>

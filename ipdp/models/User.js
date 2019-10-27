@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
 	first_name: {
 					type: String,
 					required: true
@@ -27,6 +29,11 @@ const UserSchema = new mongoose.Schema({
 					type: Boolean,
 					default: false
 	},
+	ipdp: [{
+					type: Schema.Types.ObjectID, ref: 'IPDP',
+					required: false
+	}]
+
 });
 
 //Virtual for Users full name

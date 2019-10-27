@@ -1,5 +1,51 @@
-<% include partials/header.ejs %>
 
 <div class="jumbotron">
-Test take IPDP
+<h1>About You</h1>
+<form action='/dashboard/take_ipdp' method="post">
+<div class="form-group">
+      <label for="team">Team</label>
+      <select class="form-control" id="team" name="team">
+        <option>07 Boys</option>
+        <option>08 Girls</option>
+        <option>08 Boys</option>
+        <option>09 Girls</option>
+        <option>09 Boys</option>
+				<option>10 Girls</option>
+				<option>10 Boys</option>
+      </select>
+    </div>
+
+
+<div class="form-group">
+      <label for="season">Season</label>
+      <select class="form-control" id="Season" name="season">
+        <option>Spring 2020</option>
+      </select>
+    </div>
+
+<div class="form-group">
+  <label class="col-form-label" for="nickname">Nickname</label>
+  <input type="text" class="form-control" placeholder="Enter Nickname" id="nickname" name="nickname">
+</div>
+
+    <div class="form-group">
+      <label for="non_soccer_facts">Two Non-Soccer Facts About You</label>
+      <textarea class="form-control" id="non_soccer_facts" name="non_soccer_facts" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="living_in_montana">What do you like most About Living in Montana?</label>
+      <textarea class="form-control" id="living_in_montana" name="living_in_montana" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="live_anywhere_in">If you Could Live Anywhere in the World, Where Would it be?</label>
+      <textarea class="form-control" id="live_anywhere_in" name="live_anywhere_in" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<p></p>
+<h5>Progress</h5>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 7%"></div>
 </div>
