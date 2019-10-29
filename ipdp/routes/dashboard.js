@@ -9,10 +9,12 @@ var questionaire_controller = require('../controllers/questionaire');
 
 // Models
 var User = require('../models/User');
-//var IPDP = require('../models/ipdp');
 
 // Get edit info page 
-router.get('/edit_info', questionaire_controller.edit_info_get);
+router.get('/edit_info/', questionaire_controller.edit_info_get);
+
+// Post edit info page 
+router.post('/edit_info/', questionaire_controller.edit_info_post);
 
 // Get take IPDP page1
 router.get('/take_ipdp', questionaire_controller.ipdp_page_1_get); 

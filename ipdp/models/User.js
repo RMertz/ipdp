@@ -43,6 +43,11 @@ UserSchema
 				return this.family_name + ', ' + this.first_name;
 });
 
+UserSchema
+.virtual('url')
+.get(function () {
+				return this._id;
+});
 
 const User = mongoose.model('User', UserSchema);
 
