@@ -1,25 +1,30 @@
 {
   "name": "authentificaiton",
   "version": "1.0.0",
-	"engines": {
-		"node": "10.16.3"
-	},
+  "engines": {
+    "node": "10.16.3"
+  },
   "description": "mongodb+srv://antonmertz:<password>@cluster0-phpry.mongodb.net/test?retryWrites=true&w=majority",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "devstart": "nodemon app.js",
+    "dev": "DEBUG=ipdp:* npm run devstart"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.1.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.0",
+    "express-validator": "^6.2.0",
+    "jasmine": "^3.5.0",
     "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
