@@ -6,9 +6,13 @@ const { ensureAuthenticated } = require('../config/auth');
 
 //Controllers
 var questionaire_controller = require('../controllers/questionaire');
+var coaches_controller = require('../controllers/coaches');
 
 // Models
 var User = require('../models/User');
+
+// Get coaches_dashboard
+router.get('/coaches/', questionaire_controller.coaches_get);
 
 // Get edit info page 
 router.get('/edit_info/', questionaire_controller.edit_info_get);

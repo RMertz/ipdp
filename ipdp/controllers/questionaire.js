@@ -10,6 +10,23 @@ const { sanitizeBody } = require('express-validator/filter');
 var User = require('../models/User');
 var IPDP = require('../models/IPDP');
 
+
+// Get coaches dashboard request
+exports.coaches_get = [
+				// Get Teams to use in selector
+					
+				// Render
+				(req, res, next) => {
+							  let errors = [];
+								if(req.user.isCoach)
+											res.render('coaches');
+
+								else
+										errors.push({ msg: 'You are not a Coach. If this is a mistake email antonmertz@gmail.com' });	
+										res.render('dashboard', { errors });
+				}
+];
+
 // Get edit info request
 exports.edit_info_get = [
 
@@ -38,6 +55,13 @@ exports.edit_info_post = [
 							if(typeof req.body.email==='undefined' || req.body.email ==='')
 										req.body.email = req.user.email
 
+							// Test if coaches passcode is valid
+							if(req.body.isCoach==='soElite')
+										req.body.isCoach = true;
+							else
+										req.body.isCoach = false;
+							
+
 
 
 							User.findByIdAndUpdate(
@@ -46,7 +70,8 @@ exports.edit_info_post = [
     
     					// the change to be made. Mongoose will smartly combine your existing 
     					// document with this change, which allows for partial updates too
-								req.body,
+							req.body,
+											
     
     					// an option that asks mongoose to return the updated version 
     					// of the document instead of the pre-updated one.
