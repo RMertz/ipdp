@@ -17,13 +17,11 @@ exports.coaches_get = [
 					
 				// Render
 				(req, res, next) => {
-							  let errors = [];
 								if(req.user.isCoach)
 											res.render('coaches');
 
 								else
-										errors.push({ msg: 'You are not a Coach. If this is a mistake email antonmertz@gmail.com' });	
-										res.render('dashboard', { errors });
+										res.render('confirm_coach');
 				}
 ];
 
@@ -109,7 +107,6 @@ exports.ipdp_page_1_post = [
 				(req, res, next) => {
 							//Create valid IPDP	
 								var ipdp = new IPDP({
-												team: req.body.team,
 												season: req.body.season,
 												nickname: req.body.nickname,
 												non_soccer_facts: req.body.non_soccer_facts,

@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const IPDPSchema = new Schema({
-	team: {
-					type: String,
-					required: false 
-	},
-
 	season: {
 					type: String,
 					required: false 

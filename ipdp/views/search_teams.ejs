@@ -1,0 +1,28 @@
+<% include partials/coachesHeader.ejs %>
+<div class="jumbotron">
+  <h1 class="display-5">Team Search</h1>
+<% include partials/messages.ejs %>
+  <p class="lead">
+  
+<form action='/coaches/search_teams/' method="post">
+
+Please select a team:
+</p>
+<div class="form-group">
+      <label for="team">Team</label>
+      <select class="form-control" id="team" name="team">
+        <option>07 Boys</option>
+        <option>08 Girls</option>
+        <option>08 Boys</option>
+        <option>09 Girls</option>
+        <option>09 Boys</option>
+				<option>10 Girls</option>
+				<option>10 Boys</option>
+      </select>
+    </div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+
+</fieldset>
+
+
+</div>

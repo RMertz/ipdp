@@ -18,13 +18,11 @@ exports.coaches_get = [
 					
 				// Render
 				(req, res, next) => {
-							  let errors = [];
 								if(req.user.isCoach)
 											res.render('coaches');
 
 								else
-										errors.push({ msg: 'You are not a Coach. If this is a mistake email antonmertz@gmail.com' });	
-										res.render('dashboard', { errors });
+										res.render('confirm_coach');
 				}
 ];
 
@@ -40,8 +38,40 @@ exports.edit_info_get = [
 											res.render('edit_info_coaches', { user: req.user } );
 
 								else
-											errors.push({ msg: 'You are not a Coach. If this is a mistake email antonmertz@gmail.com' });	
+											errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 											res.render('dashboard', { errors });
+
+				}
+];
+
+
+
+// Post confirm coach 
+exports.confirm_coach_post = [
+				
+				(req, res, next) => {
+
+							// Test if coaches passcode is valid
+							if(req.body.isCoach==='passcode'){
+										req.body.isCoach = true;
+										User.findByIdAndUpdate(
+    											// the id of the item to find
+    											req.user.url,
+													req.body,
+    											{new: true},
+    											// the callback function
+    											(err, user) => {
+    														// Handle any possible database errors
+        												if (err) return res.status(500).send(err);
+        															return;
+    											}
+										)
+										res.render('coaches', { user: req.params.user });
+							}
+							else {
+										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
+										res.render('dashboard', { errors });
+							}
 
 				}
 ];
@@ -91,17 +121,104 @@ exports.edit_info_post = [
 ];
 
 // Get search ipdps request
-exports.search_ipdps_get = [
+exports.search_teams_get = [
 				// Get Teams to use in selector
 					
 				// Render
 				(req, res, next) => {
 							  let errors = [];
 								if(req.user.isCoach)
-											res.render('search_ipdps');
+												res.render('search_teams');	
+								else
+										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
+										res.render('dashboard', { errors });
+				}
+];
+
+// Post search teams request
+exports.search_teams_post = [
+				// Render
+				(req, res, next) => {
+							  let errors = [];
+								User.find({'team': req.body.team }, function (err, players) {
+											if (err) {
+														errors.push({ msg: 'There are no players on that team, select a different team' });
+														res.render('search_teams', { errors });
+											}
+											else if (players && players.length > 0) {
+														res.render('search_players', { players });
+											}
+											else			{
+														errors.push({ msg: 'There are no players on that team, select a different team' });
+														res.render('search_teams', {errors });
+											}
+								});
+				}
+];
+
+
+// Get search players request
+exports.search_players_get = [
+				// Get Teams to use in selector
+					
+				// Render
+				(req, res, next) => {
+							  let errors = [];
+								if(req.user.isCoach)
+											res.render('search_players');
 
 								else
-										errors.push({ msg: 'You are not a Coach. If this is a mistake email antonmertz@gmail.com' });	
+										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 										res.render('dashboard', { errors });
+				}
+];
+
+// Get individual player request
+exports.player_get = [
+
+				// Render
+				(req, res, next) => {
+							let errors = [];
+							if(req.user.isCoach){
+								User.findById(req.params.id, function (err, player) {
+												if(err) {
+															errors.push(err);
+															res.render('dashboard', { err });
+												}
+												else {
+															
+															res.render('player', { player });
+												};
+							});
+							}
+							else {
+								errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+								res.render('dashboard', { errors });
+							}
+				}
+];
+
+
+// Get individual ipdp request 
+exports.ipdp_get = [
+
+				// Render
+				(req, res, next) => {
+							let errors = [];
+							if(req.user.isCoach){
+								ipdp = IPDP.findById(req.params.id, function (err, ipdp) {
+												if(err) {
+															errors.push(err);
+															res.render('player', { err });
+												}
+												else {
+															res.render('ipdp1', { ipdp });
+												};
+								});
+							}
+							else {
+								errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+								res.render('dashboard', { errors });
+							}
 				}
 ];

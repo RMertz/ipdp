@@ -1,0 +1,16 @@
+<% include partials/header.ejs %>
+<div class="jumbotron">
+
+<h1>Edit Info</h1>
+<form action='/coaches/confirm_coach' method="post">
+<p>For the purpose of this example website, the passcode is passcode</p>
+<div class="form-group">
+  <label class="col-form-label" for="inputDefault">If you are a Coach Input Passcode to Unlock Coaches Tab</label>
+  <input type="text" class="form-control" name="isCoach" placeholder="Coaches Passcode" id="inputDefault">
+</div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+

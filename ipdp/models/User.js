@@ -32,8 +32,11 @@ const UserSchema = new Schema({
 	ipdp: [{
 					type: Schema.Types.ObjectID, ref: 'IPDP',
 					required: false
-	}]
-
+	}],
+	team: {
+					type: String,
+					default: false
+	},
 });
 
 //Virtual for Users full name
