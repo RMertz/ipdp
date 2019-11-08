@@ -14,45 +14,42 @@ var IPDP = require('../models/IPDP');
 
 // Get coaches dashboard request
 exports.coaches_get = [
-				// Get Teams to use in selector
 					
-				// Render
-				(req, res, next) => {
-								if(req.user.isCoach)
-											res.render('coaches');
-
-								else
-										res.render('confirm_coach');
-				}
+			// Render
+			(req, res, next) => {
+						if(req.user.isCoach) {
+									res.render('coaches');
+						}
+						else {
+									res.render('confirm_coach');
+						}
+			}
 ];
 
 
 // Get edit info request
 exports.edit_info_get = [
 
-				// Render
-				(req, res, next) => {
-									
-							  let errors = [];
-								if(req.user.isCoach) {
-											res.render('edit_info_coaches', { user: req.user } );
-								}
-
-								else {
-											errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
-											res.render('dashboard', { errors });
-								}
-
-				}
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach) {
+									res.render('edit_info_coaches', { user: req.user } );
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
+									res.render('dashboard', { errors });
+						}
+			}
 ];
 
 
 
 // Post confirm coach 
 exports.confirm_coach_post = [
-				
-				(req, res, next) => {
 
+				// Render
+				(req, res, next) => {
 							// Test if coaches passcode is valid
 							if(req.body.isCoach==='passcode'){
 										req.body.isCoach = true;
@@ -65,7 +62,7 @@ exports.confirm_coach_post = [
     											(err, user) => {
     														// Handle any possible database errors
         												if (err) return res.status(500).send(err);
-        															return;
+        												return;
     											}
 										)
 										res.render('coaches', { user: req.params.user });
@@ -74,143 +71,129 @@ exports.confirm_coach_post = [
 										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 										res.render('dashboard', { errors });
 							}
-
 				}
 ];
 
 // Post edit info request
 exports.edit_info_post = [
 				
-				// Render
-
-				(req, res, next) => {
-							// Test if valid input for first name
-							if(typeof req.body.first_name==='undefined' || req.body.first_name ==='')
-										req.body.first_name = req.user.first_name
-
-							// Test if valid input for last name
-							if(typeof req.body.last_name==='undefined' || req.body.last_name ==='')
-										req.body.last_name = req.user.last_name
-
-							// Test if valid input for email
-							if(typeof req.body.email==='undefined' || req.body.email ==='')
-										req.body.email = req.user.email
-
-
-							User.findByIdAndUpdate(
-    					// the id of the item to find
-    					req.user.url,
-    
-    					// the change to be made. Mongoose will smartly combine your existing 
-    					// document with this change, which allows for partial updates too
-							req.body,
-											
-    
-    					// an option that asks mongoose to return the updated version 
-    					// of the document instead of the pre-updated one.
-    					{new: true},
-    
-    
-    					// the callback function
-    					(err, user) => {
-    					// Handle any possible database errors
-        			if (err) return res.status(500).send(err);
-        					return;
-    					}
-					)
-								res.render('coaches', { user: req.params.user });
-				}
+			// Render
+			(req, res, next) => {
+						// Test if valid input for first name
+						if(typeof req.body.first_name==='undefined' || req.body.first_name ==='') {
+									req.body.first_name = req.user.first_name;
+						}
+						// Test if valid input for last name
+						if(typeof req.body.last_name==='undefined' || req.body.last_name ==='') {
+									req.body.last_name = req.user.last_name;
+						}
+						// Test if valid input for email
+						if(typeof req.body.email==='undefined' || req.body.email ==='') {
+									req.body.email = req.user.email;
+						}
+						User.findByIdAndUpdate(
+    							// the id of the item to find
+    							req.user.url,
+									req.body,
+    							{new: true},
+    							// the callback function
+    							(err, user) => {
+    										// Handle any possible database errors
+        								if (err) return res.status(500).send(err);
+        								return;
+    							}
+						)
+						res.render('coaches', { user: req.params.user });
+			}
 ];
 
 // Get search ipdps request
 exports.search_teams_get = [
-				// Get Teams to use in selector
 					
-				// Render
-				(req, res, next) => {
-							  let errors = [];
-								if(req.user.isCoach) {
-												res.render('search_teams');	
-								}
-								else {
-										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
-										res.render('dashboard', { errors });
-								}
-				}
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach) {
+									res.render('search_teams');	
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
+									res.render('dashboard', { errors });
+						}
+			}
 ];
 
 // Post search teams request
 exports.search_teams_post = [
-				// Render
-				(req, res, next) => {
-							  let errors = [];
-								User.find({'team': req.body.team }, function (err, players) {
-											if (err) {
-														errors.push({ msg: 'There are no players on that team, select a different team' });
-														res.render('search_teams', { errors });
-											}
-											else if (players && players.length > 0) {
-														res.render('search_players', { players });
-											}
-											else			{
-														errors.push({ msg: 'There are no players on that team, select a different team' });
-														res.render('search_teams', {errors });
-											}
-								});
-				}
+				
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						User.find({'team': req.body.team }, function (err, players) {
+									if (err) {
+												errors.push({ msg: 'There are no players on that team, select a different team' });
+												res.render('search_teams', { errors });
+									}
+									else if (players && players.length > 0) {
+												res.render('search_players', { players });
+									}
+									else {
+												errors.push({ msg: 'There are no players on that team, select a different team' });
+												res.render('search_teams', {errors });
+									}
+						});
+			}
 ];
-
 
 // Get search players request
 exports.search_players_get = [
-				// Get Teams to use in selector
 					
-				// Render
-				(req, res, next) => {
-							  let errors = [];
-								if(req.user.isCoach)
-											res.render('search_players');
-
-								else
+			// Render
+			(req, res, next) => {
+							let errors = [];
+							if(req.user.isCoach) {
+										res.render('search_players');
+							}
+							else {
 										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 										res.render('dashboard', { errors });
+							}
 				}
 ];
 
 // Get individual player request
 exports.player_get = [
 
-				// Render
-				(req, res, next) => {
-							let errors = [];
-							if(req.user.isCoach){
-								User.findById(req.params.id, function (err, player) {
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach){
+									User.findById(req.params.id, function (err, player) {
 												if(err) {
 															errors.push(err);
 															res.render('dashboard', { err });
 												}
 												else {
-															
 															res.render('player', { player });
 												};
-							});
-							}
-							else {
-								errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
-								res.render('dashboard', { errors });
-							}
-				}
+									});
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+									res.render('dashboard', { errors });
+						}
+			}
 ];
 
 
 // Get individual ipdp request 
 exports.ipdp_get = [
 
-				// Render
-				(req, res, next) => {
-							let errors = [];
-							if(req.user.isCoach){
-								ipdp = IPDP.findById(req.params.id, function (err, ipdp) {
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach){
+									ipdp = IPDP.findById(req.params.id, function (err, ipdp) {
 												if(err) {
 															errors.push(err);
 															res.render('player', { err });
@@ -218,11 +201,11 @@ exports.ipdp_get = [
 												else {
 															res.render('ipdp1', { ipdp });
 												};
-								});
-							}
-							else {
-								errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
-								res.render('dashboard', { errors });
-							}
-				}
+									});
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+									res.render('dashboard', { errors });
+						}
+			}
 ];
