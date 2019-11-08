@@ -34,12 +34,14 @@ exports.edit_info_get = [
 				(req, res, next) => {
 									
 							  let errors = [];
-								if(req.user.isCoach)
+								if(req.user.isCoach) {
 											res.render('edit_info_coaches', { user: req.user } );
+								}
 
-								else
+								else {
 											errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 											res.render('dashboard', { errors });
+								}
 
 				}
 ];
@@ -127,11 +129,13 @@ exports.search_teams_get = [
 				// Render
 				(req, res, next) => {
 							  let errors = [];
-								if(req.user.isCoach)
+								if(req.user.isCoach) {
 												res.render('search_teams');	
-								else
+								}
+								else {
 										errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });	
 										res.render('dashboard', { errors });
+								}
 				}
 ];
 
