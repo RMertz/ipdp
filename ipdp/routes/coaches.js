@@ -35,6 +35,6 @@ router.get('/search_players', coaches_controller.search_players_get);
 router.get('/player/:id', coaches_controller.player_get);
 
 // Get player ipdp
-router.get('player/ipdp/:id', coaches_controller.ipdp_get);
+router.get('/player/ipdp/:id', coaches_controller.ipdp_get);
 
 module.exports = router;

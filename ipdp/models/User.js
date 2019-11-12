@@ -43,7 +43,7 @@ const UserSchema = new Schema({
 UserSchema
 .virtual('full_name')
 .get(function () {
-				return this.family_name + ', ' + this.first_name;
+				return this.first_name +" " + this.last_name;
 });
 
 UserSchema

@@ -26,6 +26,7 @@ exports.ipdp_page_1_post = [
 			(req, res, next) => {
 						//Create valid IPDP	
 						var ipdp = new IPDP({
+									user_id: req.user.url,
 									season: req.body.season,
 									nickname: req.body.nickname,
 									non_soccer_facts: req.body.non_soccer_facts,

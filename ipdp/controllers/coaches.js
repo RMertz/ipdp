@@ -174,7 +174,19 @@ exports.player_get = [
 															res.render('dashboard', { err });
 												}
 												else {
-															res.render('player', { player });
+															IPDP.find({"user_id": player.url }, function (err, ipdps) {
+																		if (err) {
+																					errors.push(err);
+																					res.render('search_players', { errors });
+																		}
+																		else if (ipdps && ipdps.length > 0) {
+																					res.render('player', { player, ipdps });
+																		}
+																		else {
+																					res.render('player', { player });
+																		}
+															});
+									
 												};
 									});
 						}
@@ -193,13 +205,13 @@ exports.ipdp_get = [
 			(req, res, next) => {
 						let errors = [];
 						if(req.user.isCoach){
-									ipdp = IPDP.findById(req.params.id, function (err, ipdp) {
+									IPDP.findById(req.params.id, function (err, ipdp) {
 												if(err) {
 															errors.push(err);
 															res.render('player', { err });
 												}
 												else {
-															res.render('ipdp1', { ipdp });
+															res.render('player_ipdp', { ipdp });
 												};
 									});
 						}
