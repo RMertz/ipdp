@@ -3,7 +3,7 @@
 <% include partials/messages.ejs %>
   <h1 class="display-5"><%= player.first_name %> <%= player.last_name %></h1>
 	<% player.ipdp.forEach(function(indiv) { %>
-		<a class="btn btn-primary btn-lg" href="/coaches/player/ipdp/<%= indiv.url %>" role="button"><%= indiv.season %></a>
+		<a class="btn btn-primary btn-lg" role="button"><%= indiv.season %></a>
 	<% }) %>
 	
 </div>

@@ -3,6 +3,6 @@
   <h1 class="display-5">Player Search</h1>
 <% include partials/messages.ejs %>
 <% players.forEach(function(player) { %>
-  <a class="btn btn-primary btn-lg" role="button"><%= player.first_name %> <%= player.last_name %></a>
+  <a class="btn btn-primary btn-lg" role="button" href="/coaches/player/<%= player.url %>"><%= player.first_name %> <%= player.last_name %></a>
 	<% }) %>
 </div>
