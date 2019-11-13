@@ -79,5 +79,45 @@
 <p>I am Confident of Coming Through Under Pressure:<b> <%= ipdp.confident_under_pressure %></b></p>
 
 <h1>Character</h1>
+<p>Give Positive Feedback to a Team-mate:<b> <%= ipdp.give_positive_feedback %></b></p>
+<p>Encourage a Team-mate:<b> <%= ipdp.encourage_teammate %></b></p>
+<p>Give Constructive Feedback to a Team-mate:<b> <%= ipdp.give_constructive_feedback %></b></p>
+<p>Congratualate a Teammate for Good Play:<b> <%= ipdp.congratulate_teammate %></b></p>
+<p>Help an Opponent off the Ground:<b> <%= ipdp.help_opponent_ground %></b></p>
+<p>Ask to Stop Player When an Opponent is Injured:<b> <%= ipdp.opponent_injured %></b></p>
+<p>Help an Injured Opponent:<b> <%= ipdp.help_injured_opponent %></b></p>
+<p>Argue with a Team-mate:<b> <%= ipdp.argue_with_teammate %></b></p>
+<p>Verbally Abuse a Team-mate:<b> <%= ipdp.verbally_abuse_teammate %></b></p>
+<p>Critisize Team-mate:<b> <%= ipdp.critisize_teammate %></b></p>
+<p>Yell at Team-mate:<b> <%= ipdp.yell_at_teammate %></b></p>
+<p>Show Frustration at a Team-mate's Poor Play:<b> <%= ipdp.show_frustration %></b></p>
+<p>Critisize Opponent:<b> <%= ipdp.critisize_opponent %></b></p>
+<p>Deliberately Foul an Opponent:<b> <%= ipdp.foul_opponent %></b></p>
+<p>Retaliate After a bad Foul:<b> <%= ipdp.retaliate_after_foul %></b></p>
+<p>Try to Wind up an Opponent:<b> <%= ipdp.wind_up_opponent %></b></p>
+<p>Try to Injure an Opponent:<b> <%= ipdp.try_injure_opponent %></b></p>
+<p>Intentionally Distract an Opponent:<b> <%= ipdp.intentionally_distract_opponent %></b></p>
+<p>Intentionally Break the Rules of the Game:<b> <%= ipdp.intentionally_break_rules %></b></p>
+<p>Physically Intimidate an Opponent:<b> <%= ipdp.physically_intimidate_opponent %></b></p>
+
+<h1>Goals</h1>
+<p>Short Term Goals (during this current season):</p>
+<p><b><%= ipdp.short_term_goals %></b></p>
+<p>Long Term Goals (beyond this current season):</p>
+<p><b><%= ipdp.long_term_goals %></b></p>
+
+<h1>Final Thoughts</h1>
+<p>What can the Coaches do to Help you Reach Your Goals:</p>
+<p><b><%= ipdp.what_can_coaches_do %></b></p>
+<p>Anything you want to say to Coaches:</p>
+<p><b> <%= ipdp.want_to_say %></b></p>
 
 
+<form action='/coaches/player/ipdp/<%= ipdp.url %>' method="post">
+
+<div class="form-group">
+      <label for="coaches_feedback">Your Thoughts</label>
+      <textarea class="form-control" id="coaches_feedback" name="coaches_feedback" rows="3"></textarea>
+</div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

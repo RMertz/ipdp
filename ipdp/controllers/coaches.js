@@ -204,6 +204,7 @@ exports.ipdp_get = [
 			// Render
 			(req, res, next) => {
 						let errors = [];
+						coach = req.user;
 						if(req.user.isCoach){
 									IPDP.findById(req.params.id, function (err, ipdp) {
 												if(err) {
@@ -211,9 +212,27 @@ exports.ipdp_get = [
 															res.render('player', { err });
 												}
 												else {
-															res.render('player_ipdp', { ipdp });
+															res.render('player_ipdp', { coach, ipdp });
 												};
 									});
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+									res.render('dashboard', { errors });
+						}
+			}
+];
+
+
+// Post individual ipdp with coaches comments 
+exports.ipdp_post = [
+			//We want to attach the coaches comment, and the coaches id to an array of commments/ids
+				//so that coaches cna view their comments with the players name etc.
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach){
+															res.render('dashboard');
 						}
 						else {
 									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });

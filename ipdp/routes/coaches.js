@@ -37,4 +37,7 @@ router.get('/player/:id', coaches_controller.player_get);
 // Get player ipdp
 router.get('/player/ipdp/:id', coaches_controller.ipdp_get);
 
+// Post player ipdp
+router.post('/player/ipdp/:id', coaches_controller.ipdp_post);
+
 module.exports = router;
