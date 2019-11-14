@@ -9,6 +9,8 @@ const { sanitizeBody } = require('express-validator/filter');
 // Required Models
 var User = require('../models/User');
 var IPDP = require('../models/IPDP');
+var Comment = require('../models/Comment');
+
 
 
 
@@ -231,8 +233,63 @@ exports.ipdp_post = [
 			// Render
 			(req, res, next) => {
 						let errors = [];
-						if(req.user.isCoach){
-															res.render('dashboard');
+						if(req.user.isCoach) {
+									//get coach and player
+									//
+									coach_name = req.user.full_name;
+									IPDP.findById(req.params.id, function (err, ipdp) {
+												if(err) {
+															errors.push(err);
+															res.render('player_ipdp', { err });
+												}
+												else {
+															//get ipdp.season
+															season = ipdp.season;
+															User.findById(ipdp.user_id, function (err, player) {
+																		if(err) {
+																					errors.push(err);
+																					res.render('player_ipdp', { err });
+																		}
+																		else {
+																					var comment = new Comment({
+																								player_name: player.full_name,
+																								coach_name: coach_name,
+																								season: season,
+																								read: false,
+																								comment: req.body.coaches_feedback
+																					});
+																					//update coach.comments
+																					coach.comment.push(comment);
+																					coach.save();
+																					//
+																					//get player.comments
+																					player.comment.push(comment);
+																					player.save();
+																					//
+																					res.render('coaches_comments', { comment });
+																					//res.render('coaches_comments', { comments: coach.comment });
+																		};
+															});
+												};
+									});
+						}
+						else {
+									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });
+									res.render('dashboard', { errors });
+						}
+			}
+];
+
+// coaches comments 
+exports.coaches_comments_get = [
+			//We want to attach the coaches comment, and the coaches id to an array of commments/ids
+				//so that coaches cna view their comments with the players name etc.
+			// Render
+			(req, res, next) => {
+						let errors = [];
+						if(req.user.isCoach) {
+									//res.render('coaches_ipdps', { req.user.comments });
+									res.render('coaches_comments');
 						}
 						else {
 									errors.push({ msg: 'You are not a coach. If this is a mistake email antonmertz@gmail.com' });

@@ -1,5 +1,6 @@
 <% include partials/coachesHeader.ejs %>
 <div class="jumbotron">
+<% include partials/messages.ejs %>
 <h1>About You</h1>
 <p>Season: <b><%= ipdp.season %></b></p>
 <p>Nickname: <b><%= ipdp.nickname %></b></p>
@@ -116,7 +117,7 @@
 <form action='/coaches/player/ipdp/<%= ipdp.url %>' method="post">
 
 <div class="form-group">
-      <label for="coaches_feedback">Your Thoughts</label>
+      <label for="coaches_feedback"><h1>Coaches Comments</h1></label>
       <textarea class="form-control" id="coaches_feedback" name="coaches_feedback" rows="3"></textarea>
 </div>
     <button type="submit" class="btn btn-primary">Submit</button>

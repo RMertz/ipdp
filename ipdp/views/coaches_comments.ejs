@@ -1,0 +1,13 @@
+<% include partials/coachesHeader.ejs %>
+<div class="jumbotron">
+  <h1 class="display-5">Your Recent Comments</h1>
+<% include partials/messages.ejs %>
+Hi!
+
+<p>Comment: <%= comment.comment %></p>
+<p>Player: <%= comment.player_name %></p>
+<p>Coach: <%= comment.coach_name %></p>
+<p>Season: <%= comment.season %></p>
+<p>Read: <%= comment.read %></p>
+
+</div>

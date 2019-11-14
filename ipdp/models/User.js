@@ -33,6 +33,10 @@ const UserSchema = new Schema({
 					type: Schema.Types.ObjectID, ref: 'IPDP',
 					required: false
 	}],
+	comment: [{
+					type: Schema.Types.ObjectID, ref: 'Comment',
+					required: false
+	}],
 	team: {
 					type: String,
 					default: false
