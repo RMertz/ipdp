@@ -38,9 +38,15 @@ router.get('/player/:id', coaches_controller.player_get);
 router.get('/player/ipdp/:id', coaches_controller.ipdp_get);
 
 // Post player ipdp
-router.post('/player/ipdp/:id', coaches_controller.ipdp_post);
+router.post('/player/ipdp/:id', coaches_controller.ipdp_comment_post);
 
 // Get Coaches Comments 
 router.get('/coaches_comments/', coaches_controller.coaches_comments_get);
+
+// Get Coaches Comments Staged 
+router.get('/coaches_comments_staged/', coaches_controller.coaches_comments_staged_get);
+
+// Remove comment from easy-grab 
+router.get('/remove_comment/:id', coaches_controller.remove_comment_get);
 
 module.exports = router;

@@ -8,6 +8,10 @@ const IPDPSchema = new Schema({
 					type: String,
 					required: false 
 	},
+	user_name: {
+					type: String,
+					required: false 
+	},
 	season: {
 					type: String,
 					required: false 

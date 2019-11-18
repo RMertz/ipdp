@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-	coach_name: {
+	coach_id: {
+					type: String,
+					required: true
+	},
+	player_id: {
 					type: String,
 					required: true
 	},
@@ -15,7 +19,6 @@ const CommentSchema = new Schema({
 					type: String,
 					required: true
 	},
-				
 	season: {
 					type: String,
 					required: true
@@ -23,7 +26,7 @@ const CommentSchema = new Schema({
 	read: {
 					type: Boolean,
 					default: false
-	},
+	}
 });
 
 CommentSchema
