@@ -54,6 +54,6 @@ app.use('/dashboard', require('./routes/dashboard'));
 app.use('/coaches', require('./routes/coaches'));
 app.use('/questionnaire', require('./routes/questionnaire'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
